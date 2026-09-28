@@ -1,0 +1,33 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>LIB String Maker</title>
+<style>
+body{background:#111;color:#eee;font-family:Arial;margin:0;padding:30px}
+main{max-width:650px;margin:auto}
+input,textarea,button{box-sizing:border-box;width:100%;font-size:18px;border-radius:8px;border:1px solid #444;background:#1b1b1b;color:#fff;padding:12px;margin-top:10px}
+button{cursor:pointer;background:#292929}
+textarea{height:150px;resize:vertical;font-family:monospace}
+</style>
+</head>
+<body>
+<main>
+<h2>LIB String Maker</h2>
+<input id="name" placeholder="libJokerClient.so">
+<button onclick="make()">Generate</button>
+<textarea id="out" readonly placeholder="Output appears here..."></textarea>
+</main>
+
+<script>
+function make(){
+  let n=document.getElementById("name").value.trim();
+  n=n.replace(/^lib/i,"").replace(/\.so$/i,"");
+  document.getElementById("out").value =
+`const-string v0, "${n}"
+invoke-static {v0}, Ljava/lang/System;->loadLibrary(Ljava/lang/String;)V`;
+}
+</script>
+</body>
+</html>
